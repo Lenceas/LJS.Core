@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LJS.Core.IServices\LJS.Core.IServices.csproj" />
+    <ProjectReference Include="..\LJS.Core.Repository\LJS.Core.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
