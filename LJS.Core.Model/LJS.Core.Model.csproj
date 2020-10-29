@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="sqlSugarCore" Version="5.0.0.22" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\LJS.Core.Common\LJS.Core.Common.csproj" />
   </ItemGroup>
 

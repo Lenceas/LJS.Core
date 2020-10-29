@@ -54,6 +54,9 @@ namespace LJS.Core.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // 查看注入的所有服务
+            app.UseAllServicesMildd(_services);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -64,6 +67,7 @@ namespace LJS.Core.Api
                 app.UseHsts();
             }
 
+            // Swagger
             app.UseSwaggerMildd();
 
             app.UseHttpsRedirection();

@@ -4,5 +4,93 @@
         <name>LJS.Core.Model</name>
     </assembly>
     <members>
+        <member name="M:LJS.Core.Model.Seed.MyContext.GetMainConnectionDb">
+            <summary>
+            连接字符串
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Seed.MyContext.ConnectionString">
+            <summary>
+            连接字符串
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Seed.MyContext.DbType">
+            <summary>
+            数据库类型
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Seed.MyContext.Db">
+            <summary>
+            数据连接对象 
+            </summary>
+        </member>
+        <member name="M:LJS.Core.Model.Seed.MyContext.#ctor(SqlSugar.ISqlSugarClient)">
+            <summary>
+            功能描述:构造函数
+            </summary>
+        </member>
+        <member name="M:LJS.Core.Model.Seed.MyContext.GetEntityDB``1">
+            <summary>
+            功能描述:获取数据库处理对象
+            </summary>
+            <returns>返回值</returns>
+        </member>
+        <member name="M:LJS.Core.Model.Seed.MyContext.GetEntityDB``1(SqlSugar.SqlSugarClient)">
+            <summary>
+            功能描述:获取数据库处理对象
+            </summary>
+            <param name="db">db</param>
+            <returns>返回值</returns>
+        </member>
+        <member name="M:LJS.Core.Model.Seed.MyContext.CreateTableByEntity``1(System.Boolean,``0[])">
+            <summary>
+            功能描述:根据实体类生成数据库表
+            </summary>
+            <param name="blnBackupTable">是否备份表</param>
+            <param name="lstEntitys">指定的实体</param>
+        </member>
+        <member name="M:LJS.Core.Model.Seed.MyContext.CreateTableByEntity(System.Boolean,System.Type[])">
+            <summary>
+            功能描述:根据实体类生成数据库表
+            </summary>
+            <param name="blnBackupTable">是否备份表</param>
+            <param name="lstEntitys">指定的实体</param>
+        </member>
+        <member name="M:LJS.Core.Model.Seed.MyContext.Init(System.String,SqlSugar.DbType)">
+            <summary>
+            功能描述:设置初始化参数
+            </summary>
+            <param name="strConnectionString">连接字符串</param>
+            <param name="enmDbType">数据库类型</param>
+        </member>
+        <member name="M:LJS.Core.Model.Seed.MyContext.GetConnectionConfig(System.Boolean,System.Boolean)">
+            <summary>
+            功能描述:创建一个链接配置
+            </summary>
+            <param name="blnIsAutoCloseConnection">是否自动关闭连接</param>
+            <param name="blnIsShardSameThread">是否夸类事务</param>
+            <returns>ConnectionConfig</returns>
+        </member>
+        <member name="M:LJS.Core.Model.Seed.MyContext.GetCustomDB(SqlSugar.ConnectionConfig)">
+            <summary>
+            功能描述:获取一个自定义的DB
+            </summary>
+            <param name="config">config</param>
+            <returns>返回值</returns>
+        </member>
+        <member name="M:LJS.Core.Model.Seed.MyContext.GetCustomEntityDB``1(SqlSugar.SqlSugarClient)">
+            <summary>
+            功能描述:获取一个自定义的数据库处理对象
+            </summary>
+            <param name="sugarClient">sugarClient</param>
+            <returns>返回值</returns>
+        </member>
+        <member name="M:LJS.Core.Model.Seed.MyContext.GetCustomEntityDB``1(SqlSugar.ConnectionConfig)">
+            <summary>
+            功能描述:获取一个自定义的数据库处理对象
+            </summary>
+            <param name="config">config</param>
+            <returns>返回值</returns>
+        </member>
     </members>
 </doc>
