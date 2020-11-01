@@ -37,7 +37,7 @@ namespace LJS.Core.Repository.UnitOfWork
             catch (Exception ex)
             {
                 GetDbClient().RollbackTran();
-                throw ex;
+                throw new Exception(ex.Message);
             }
         }
 

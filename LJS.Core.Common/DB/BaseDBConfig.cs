@@ -7,7 +7,7 @@ namespace LJS.Core.Common.DB
 {
     public class BaseDBConfig
     {
-        public static (List<MutiDBOperate>, List<MutiDBOperate>) MutiConnectionString => MutiInitConn();
+        public static (List<MutiDBOperate> allDbs, List<MutiDBOperate> slaveDbs) MutiConnectionString => MutiInitConn();
 
         private static string DifDBConnOfSecurity(params string[] conn)
         {
@@ -57,7 +57,6 @@ namespace LJS.Core.Common.DB
                 }
             }
 
-
             // 读写分离，且必须是单库模式，获取从库
             if (AppSettings.app(new string[] { "CQRSEnabled" }).ObjToBool() && !AppSettings.app(new string[] { "MutiDBEnabled" }).ObjToBool())
             {
@@ -67,10 +66,7 @@ namespace LJS.Core.Common.DB
                 }
             }
 
-
-
             return (listdatabase, listdatabaseSlaveDB);
-            //}
         }
 
         private static MutiDBOperate SpecialDbString(MutiDBOperate mutiDBOperate)
@@ -79,10 +75,10 @@ namespace LJS.Core.Common.DB
             {
                 mutiDBOperate.Connection = $"DataSource=" + Path.Combine(Environment.CurrentDirectory, mutiDBOperate.Connection);
             }
-            //else if (mutiDBOperate.DbType == DataBaseType.SqlServer)
-            //{
-            //    mutiDBOperate.Conn = DifDBConnOfSecurity(@"D:\my-file\dbCountPsw1.txt", @"c:\my-file\dbCountPsw1.txt", mutiDBOperate.Conn);
-            //}
+            else if (mutiDBOperate.DbType == DataBaseType.SqlServer)
+            {
+                mutiDBOperate.Connection = DifDBConnOfSecurity(@"D:\my-file\dbCountPsw1.txt", @"c:\my-file\dbCountPsw1.txt", mutiDBOperate.Connection);
+            }
             else if (mutiDBOperate.DbType == DataBaseType.MySql)
             {
                 mutiDBOperate.Connection = DifDBConnOfSecurity(@"D:\my-file\dbCountPsw1_MySqlConn.txt", @"c:\my-file\dbCountPsw1_MySqlConn.txt", mutiDBOperate.Connection);

@@ -4,6 +4,104 @@
         <name>LJS.Core.Model</name>
     </assembly>
     <members>
+        <member name="T:LJS.Core.Model.MessageModel`1">
+            <summary>
+            通用返回信息类
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.MessageModel`1.status">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.MessageModel`1.success">
+            <summary>
+            操作是否成功
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.MessageModel`1.msg">
+            <summary>
+            返回信息
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.MessageModel`1.response">
+            <summary>
+            返回数据集合
+            </summary>
+        </member>
+        <member name="T:LJS.Core.Model.Models.TestModel">
+            <summary>
+            测试模型
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.TestModel.Id">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.TestModel.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.TestModel.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.TestModel.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.TestModel.UpdateTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.TestModel.IsDeleted">
+            <summary>
+            逻辑删除
+            </summary>
+        </member>
+        <member name="T:LJS.Core.Model.PageModel`1">
+            <summary>
+            通用分页信息类
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.PageModel`1.page">
+            <summary>
+            当前页标
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.PageModel`1.pageCount">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.PageModel`1.dataCount">
+            <summary>
+            数据总数
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.PageModel`1.pageSize">
+            <summary>
+            每页大小
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.PageModel`1.data">
+            <summary>
+            返回数据
+            </summary>
+        </member>
+        <member name="M:LJS.Core.Model.Seed.DBSeed.SeedAsync(LJS.Core.Model.Seed.MyContext,System.String)">
+            <summary>
+            异步添加种子数据
+            </summary>
+            <param name="myContext"></param>
+            <param name="WebRootPath"></param>
+            <returns></returns>
+        </member>
         <member name="M:LJS.Core.Model.Seed.MyContext.GetMainConnectionDb">
             <summary>
             连接字符串

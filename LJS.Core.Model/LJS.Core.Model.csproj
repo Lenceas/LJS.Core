@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.11.3" />
-    <PackageReference Include="sqlSugarCore" Version="5.0.0.22" />
+    <PackageReference Include="sqlSugarCore" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>

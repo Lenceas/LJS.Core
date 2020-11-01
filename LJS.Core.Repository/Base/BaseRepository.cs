@@ -8,12 +8,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace LJS.Core.Repository
+namespace LJS.Core.Repository.Base
 {
-    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class, new()
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, new()
     {
         private readonly IUnitOfWork _unitOfWork;
         private SqlSugarClient _dbBase;
@@ -47,7 +46,7 @@ namespace LJS.Core.Repository
             get { return _db; }
         }
 
-        public RepositoryBase(IUnitOfWork unitOfWork)
+        public BaseRepository(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             _dbBase = unitOfWork.GetDbClient();

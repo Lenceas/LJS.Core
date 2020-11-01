@@ -1,15 +1,14 @@
 ﻿using LJS.Core.Model;
+using LJS.Core.Repository.Base;
 using MongoDB.Driver;
-using SqlSugar;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace LJS.Core.Repository
+namespace LJS.Core.Repository.Mongo
 {
-    public interface IMongoRepository<TEntity> : IRepositoryBase<TEntity> where TEntity : class
+    public interface IMongoRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
         #region 同步方法
         /// <summary>

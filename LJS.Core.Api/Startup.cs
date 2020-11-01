@@ -1,6 +1,8 @@
+using Autofac;
 using LJS.Core.Api.Filter;
 using LJS.Core.Common;
 using LJS.Core.Extensions;
+using LJS.Core.Model.Seed;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +31,8 @@ namespace LJS.Core.Api
         {
             services.AddSingleton(new AppSettings(Configuration));
 
+            services.AddSqlsugarSetup();
+            services.AddDbSetup();
             services.AddSwaggerSetup();
 
             services.AddControllers(o =>
@@ -44,15 +48,20 @@ namespace LJS.Core.Api
                 //不使用驼峰样式的key
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 //设置时间格式
-                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                //options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
                 //忽略Model中为null的属性
-                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                //options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });
 
             _services = services;
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new AutofacModuleRegister());
+        }
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MyContext myContext)
         {
             // 查看注入的所有服务
             app.UseAllServicesMildd(_services);
@@ -80,6 +89,9 @@ namespace LJS.Core.Api
             {
                 endpoints.MapControllers();
             });
+
+            // 生成种子数据
+            app.UseSeedDataMildd(myContext, Env.WebRootPath);
         }
     }
 }

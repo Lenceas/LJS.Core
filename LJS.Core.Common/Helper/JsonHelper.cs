@@ -26,7 +26,7 @@ namespace LJS.Core.Common.Helper
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.Message);
             }
             return result;
         }
@@ -54,7 +54,7 @@ namespace LJS.Core.Common.Helper
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.Message);
             }
 
             return st.ToString();
@@ -95,7 +95,7 @@ namespace LJS.Core.Common.Helper
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.Message);
             }
 
             return st.ToString();
