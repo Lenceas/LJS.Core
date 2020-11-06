@@ -14,7 +14,7 @@ namespace LJS.Core.Model.Seed
 {
     public class DBSeed
     {
-        private static string SeedDataFolder = "LJSCore.Data.json/{0}.tsv";
+        private static string SeedDataFolder = "/LJSCore.Data.json/{0}.tsv";
 
         /// <summary>
         /// 异步添加种子数据
@@ -114,7 +114,7 @@ namespace LJS.Core.Model.Seed
                     #region TestModel
                     if (!await myContext.Db.Queryable<TestModel>().AnyAsync())
                     {
-                        myContext.GetEntityDB<TestModel>().InsertRange(JsonHelper.ParseFormByJson<List<TestModel>>(FileHelper.ReadFile(string.Format(SeedDataFolder, "TestModel"), Encoding.UTF8)));
+                        myContext.GetEntityDB<TestModel>().InsertRange(JsonHelper.ParseFormByJson<List<TestModel>>(FileHelper.ReadFile(string.Format(WebRootPath + SeedDataFolder, "TestModel"), Encoding.UTF8)));
                         Console.WriteLine("Table:TestModel created success!");
                     }
                     else
