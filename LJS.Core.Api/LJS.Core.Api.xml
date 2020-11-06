@@ -4,6 +4,11 @@
         <name>LJS.Core.Api</name>
     </assembly>
     <members>
+        <member name="T:LJS.Core.Api.Controllers.v2.TestController">
+            <summary>
+            测试专用
+            </summary>
+        </member>
         <member name="T:LJS.Core.Api.CustomRouteAttribute">
             <summary>
             自定义路由 /api/{version}/[controler]/[action]

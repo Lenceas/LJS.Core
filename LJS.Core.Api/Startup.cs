@@ -48,7 +48,7 @@ namespace LJS.Core.Api
                 //不使用驼峰样式的key
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 //设置时间格式
-                //options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
                 //忽略Model中为null的属性
                 //options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });

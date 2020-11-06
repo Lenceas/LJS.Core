@@ -114,6 +114,9 @@ namespace LJS.Core.Model.Seed
                     #region TestModel
                     if (!await myContext.Db.Queryable<TestModel>().AnyAsync())
                     {
+                        //var data = JsonConvert.DeserializeObject<List<TestModel>>(FileHelper.ReadFile(string.Format(WebRootPath + SeedDataFolder, "TestModel"), Encoding.UTF8), setting);
+                        //myContext.GetEntityDB<TestModel>().InsertRange(data);
+
                         myContext.GetEntityDB<TestModel>().InsertRange(JsonHelper.ParseFormByJson<List<TestModel>>(FileHelper.ReadFile(string.Format(WebRootPath + SeedDataFolder, "TestModel"), Encoding.UTF8)));
                         Console.WriteLine("Table:TestModel created success!");
                     }
