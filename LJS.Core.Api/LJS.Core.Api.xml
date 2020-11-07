@@ -9,6 +9,41 @@
             测试专用
             </summary>
         </member>
+        <member name="M:LJS.Core.Api.Controllers.v2.TestController.GetAll">
+            <summary>
+            查询列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LJS.Core.Api.Controllers.v2.TestController.Get(System.Int64)">
+            <summary>
+            查询单个
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJS.Core.Api.Controllers.v2.TestController.Add(LJS.Core.Model.Models.TestModel)">
+            <summary>
+            添加
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJS.Core.Api.Controllers.v2.TestController.Update(System.Int64,LJS.Core.Model.Models.TestModel)">
+            <summary>
+            更新
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJS.Core.Api.Controllers.v2.TestController.Delete(System.Int64)">
+            <summary>
+            删除
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:LJS.Core.Api.CustomRouteAttribute">
             <summary>
             自定义路由 /api/{version}/[controler]/[action]

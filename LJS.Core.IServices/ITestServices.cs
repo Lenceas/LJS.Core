@@ -11,5 +11,7 @@ namespace LJS.Core.IServices
     public interface ITestServices : IBaseServices<TestModel>
     {
         Task<List<TestModel>> GetTests();
+
+        Task<TestModel> GetById(long id);
     }
 }

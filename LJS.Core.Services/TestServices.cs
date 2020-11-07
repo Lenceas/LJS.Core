@@ -20,14 +20,14 @@ namespace LJS.Core.Services
             base.BaseDal = dal;
         }
 
-        /// <summary>
-        /// 获取实体列表
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public async Task<List<TestModel>> GetTests()
         {
             return await base.Query(a => a.Id > 0, a => a.Id);
+        }
+
+        public async Task<TestModel> GetById(long id)
+        {
+            return await base.QueryById(id);
         }
     }
 }
