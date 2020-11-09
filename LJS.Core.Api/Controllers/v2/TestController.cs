@@ -1,11 +1,11 @@
-﻿using LJS.Core.IServices;
+﻿using AutoMapper;
+using LJS.Core.IServices;
 using LJS.Core.Model;
 using LJS.Core.Model.Models;
+using LJS.Core.Model.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using static LJS.Core.Extensions.CustomApiVersion;
 
@@ -20,10 +20,12 @@ namespace LJS.Core.Api.Controllers.v2
     public class TestController : ControllerBase
     {
         readonly ITestServices _testServices;
+        readonly IMapper _mapper;
 
-        public TestController(ITestServices testServices)
+        public TestController(ITestServices testServices, IMapper mapper)
         {
             _testServices = testServices;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -31,13 +33,13 @@ namespace LJS.Core.Api.Controllers.v2
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<MessageModel<List<TestModel>>> GetAll()
+        public async Task<MessageModel<List<TestViewModels>>> GetAll()
         {
-            return new MessageModel<List<TestModel>>()
+            return new MessageModel<List<TestViewModels>>()
             {
                 msg = "查询成功",
                 success = true,
-                response = await _testServices.GetTests()
+                response = _mapper.Map<List<TestViewModels>>(await _testServices.GetTests())
             };
         }
 
@@ -47,9 +49,9 @@ namespace LJS.Core.Api.Controllers.v2
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<MessageModel<TestModel>> Get(long id)
+        public async Task<MessageModel<TestViewModels>> Get(long id)
         {
-            var data = new MessageModel<TestModel>();
+            var data = new MessageModel<TestViewModels>();
             var entity = await _testServices.GetById(id);
             if (entity != null)
             {
@@ -61,7 +63,7 @@ namespace LJS.Core.Api.Controllers.v2
                 data.status = 204;
                 data.msg = "未匹配到数据";
             }
-            data.response = entity;
+            data.response = _mapper.Map<TestViewModels>(entity);
             return data;
         }
 

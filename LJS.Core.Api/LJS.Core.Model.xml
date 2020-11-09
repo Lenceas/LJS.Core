@@ -190,5 +190,35 @@
             <param name="config">config</param>
             <returns>返回值</returns>
         </member>
+        <member name="T:LJS.Core.Model.ViewModels.TestViewModels">
+            <summary>
+            测试信息展示类
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.ViewModels.TestViewModels.Id">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.ViewModels.TestViewModels.Name">
+            <summary>
+            名称 
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.ViewModels.TestViewModels.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.ViewModels.TestViewModels.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.ViewModels.TestViewModels.UpdateTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
     </members>
 </doc>

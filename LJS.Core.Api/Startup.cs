@@ -33,6 +33,7 @@ namespace LJS.Core.Api
 
             services.AddSqlsugarSetup();
             services.AddDbSetup();
+            services.AddAutoMapperSetup();
             services.AddSwaggerSetup();
 
             services.AddControllers(o =>
