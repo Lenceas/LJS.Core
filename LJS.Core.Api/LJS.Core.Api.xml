@@ -4,6 +4,17 @@
         <name>LJS.Core.Api</name>
     </assembly>
     <members>
+        <member name="T:LJS.Core.Api.Controllers.LoginController">
+            <summary>
+            登录接口
+            </summary>
+        </member>
+        <member name="M:LJS.Core.Api.Controllers.LoginController.GetJwtToken">
+            <summary>
+            获取JWT的方法
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:LJS.Core.Api.Controllers.v2.TestController">
             <summary>
             测试专用

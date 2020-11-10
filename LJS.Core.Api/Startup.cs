@@ -9,8 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Text;
 
 namespace LJS.Core.Api
 {
@@ -35,6 +37,7 @@ namespace LJS.Core.Api
             services.AddDbSetup();
             services.AddAutoMapperSetup();
             services.AddSwaggerSetup();
+            services.AddAuthorizationSetup();
 
             services.AddControllers(o =>
             {
@@ -84,6 +87,7 @@ namespace LJS.Core.Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

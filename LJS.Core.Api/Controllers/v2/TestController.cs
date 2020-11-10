@@ -3,6 +3,7 @@ using LJS.Core.IServices;
 using LJS.Core.Model;
 using LJS.Core.Model.Models;
 using LJS.Core.Model.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -73,6 +74,7 @@ namespace LJS.Core.Api.Controllers.v2
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public async Task<MessageModel<string>> Add([FromBody] TestModel model)
         {
             var data = new MessageModel<string>();
@@ -104,6 +106,7 @@ namespace LJS.Core.Api.Controllers.v2
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<MessageModel<string>> Update(long id, [FromBody] TestModel model)
         {
             var data = new MessageModel<string>();
@@ -144,6 +147,7 @@ namespace LJS.Core.Api.Controllers.v2
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<MessageModel<string>> Delete(long id)
         {
             var data = new MessageModel<string>();
