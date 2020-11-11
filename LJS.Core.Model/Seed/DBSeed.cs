@@ -2,6 +2,7 @@
 using LJS.Core.Common.DB;
 using LJS.Core.Common.Helper;
 using LJS.Core.Model.Models;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace LJS.Core.Model.Seed
         private static string SeedDataFolder = "/LJSCore.Data.json/{0}.tsv";
 
         /// <summary>
-        /// 异步添加种子数据
+        /// 异步添加种子数据 SqlSugar
         /// </summary>
         /// <param name="myContext"></param>
         /// <param name="WebRootPath"></param>
@@ -127,6 +128,79 @@ namespace LJS.Core.Model.Seed
                     #endregion
 
                     ConsoleHelper.WriteSuccessLine($"Done seeding database!");
+                }
+
+                Console.WriteLine();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("1、如果使用的是Mysql，生成的数据库字段字符集可能不是utf8的，手动修改下，或者尝试方案：删掉数据库，在连接字符串后加上CharSet=UTF8，重新生成数据库. \n 2、其他错误：" + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 异步添加种子数据 EF Core
+        /// </summary>
+        /// <param name="mySqlContext"></param>
+        /// <param name="WebRootPath"></param>
+        /// <returns></returns>
+        public static async Task SeedAsyncByEFCore(MySqlContext mySqlContext, string WebRootPath)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(WebRootPath))
+                {
+                    throw new Exception("获取wwwroot路径时，异常！");
+                }
+
+                Console.WriteLine("************ LJS.Core DataBase Set *****************");
+                Console.WriteLine();
+
+                // 创建数据库
+                Console.WriteLine("开始重置数据库...");
+                await mySqlContext.Database.EnsureDeletedAsync();
+                await mySqlContext.Database.EnsureCreatedAsync();
+                Console.WriteLine();
+                ConsoleHelper.WriteSuccessLine("数据库重置成功!");
+                Console.WriteLine();
+                Console.WriteLine("创建表...");
+                Console.WriteLine();
+
+                if (AppSettings.app(new string[] { "AppSettings", "SeedDBDataEnabled" }).ObjToBool())
+                {
+                    JsonSerializerSettings setting = new JsonSerializerSettings();
+                    JsonConvert.DefaultSettings = new Func<JsonSerializerSettings>(() =>
+                    {
+                        //日期类型默认格式化处理
+                        setting.DateFormatHandling = DateFormatHandling.MicrosoftDateFormat;
+                        setting.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+
+                        //空值处理
+                        setting.NullValueHandling = NullValueHandling.Ignore;
+
+                        //高级用法九中的Bool类型转换 设置
+                        //setting.Converters.Add(new BoolConvert("是,否"));
+
+                        return setting;
+                    });
+
+                    Console.WriteLine("初始化数据...");
+                    Console.WriteLine();
+
+                    #region TestModel
+                    if (!await mySqlContext.TestModels.AnyAsync())
+                    {
+                        await mySqlContext.TestModels.AddRangeAsync(JsonHelper.ParseFormByJson<List<TestModel>>(FileHelper.ReadFile(string.Format(WebRootPath + SeedDataFolder, "TestModel"), Encoding.UTF8)));
+                        await mySqlContext.SaveChangesAsync();
+                        Console.WriteLine("Table:TestModel created success!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Table:TestModel already exists...");
+                    }
+                    #endregion
+                    Console.WriteLine();
+                    ConsoleHelper.WriteSuccessLine("初始化数据完成!");
                 }
 
                 Console.WriteLine();

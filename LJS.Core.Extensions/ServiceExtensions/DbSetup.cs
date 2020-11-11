@@ -15,6 +15,7 @@ namespace LJS.Core.Extensions
 
             services.AddScoped<DBSeed>();
             services.AddScoped<MyContext>();
+            services.AddDbContext<MySqlContext>();
         }
     }
 }

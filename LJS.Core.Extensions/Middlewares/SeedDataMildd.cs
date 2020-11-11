@@ -12,7 +12,7 @@ namespace LJS.Core.Extensions
     /// </summary>
     public static class SeedDataMildd
     {
-        public static void UseSeedDataMildd(this IApplicationBuilder app, MyContext myContext, string webRootPath)
+        public static void UseSeedDataMildd(this IApplicationBuilder app, MyContext myContext, MySqlContext mySqlContext, string webRootPath)
         {
             if (app == null) throw new ArgumentNullException(nameof(app));
 
@@ -20,7 +20,8 @@ namespace LJS.Core.Extensions
             {
                 if (AppSettings.app("AppSettings", "SeedDBEnabled").ObjToBool() || AppSettings.app("AppSettings", "SeedDBDataEnabled").ObjToBool())
                 {
-                    DBSeed.SeedAsync(myContext, webRootPath).Wait();
+                    //DBSeed.SeedAsync(myContext, webRootPath).Wait();
+                    DBSeed.SeedAsyncByEFCore(mySqlContext, webRootPath).Wait();
                 }
             }
             catch (Exception e)

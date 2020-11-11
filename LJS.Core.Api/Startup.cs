@@ -65,7 +65,7 @@ namespace LJS.Core.Api
             builder.RegisterModule(new AutofacModuleRegister());
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MyContext myContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MyContext myContext, MySqlContext mySqlContext)
         {
             // 查看注入的所有服务
             app.UseAllServicesMildd(_services);
@@ -96,7 +96,7 @@ namespace LJS.Core.Api
             });
 
             // 生成种子数据
-            app.UseSeedDataMildd(myContext, Env.WebRootPath);
+            app.UseSeedDataMildd(myContext, mySqlContext, Env.WebRootPath);
         }
     }
 }
