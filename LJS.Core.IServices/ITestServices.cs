@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LJS.Core.IServices
 {
-    public interface ITestServices : IBaseServices<TestModel>
+    public interface ITestServices : IBaseSqlSugarServices<TestModel>
     {
         Task<List<TestModel>> GetTests();
 

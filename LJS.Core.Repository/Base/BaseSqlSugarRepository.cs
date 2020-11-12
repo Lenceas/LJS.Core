@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace LJS.Core.Repository.Base
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, new()
+    public class BaseSqlSugarRepository<TEntity> : IBaseSqlSugarRepository<TEntity> where TEntity : class, new()
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ISqlSugarUnitOfWork _unitOfWork;
         private SqlSugarClient _dbBase;
 
         private ISqlSugarClient _db
@@ -46,7 +46,7 @@ namespace LJS.Core.Repository.Base
             get { return _db; }
         }
 
-        public BaseRepository(IUnitOfWork unitOfWork)
+        public BaseSqlSugarRepository(ISqlSugarUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             _dbBase = unitOfWork.GetDbClient();

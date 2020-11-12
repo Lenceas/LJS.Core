@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LJS.Core.Repository.Mongo
 {
-    public interface IMongoRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    public interface IMongoRepository<TEntity> : IBaseSqlSugarRepository<TEntity> where TEntity : class
     {
         #region 同步方法
         /// <summary>

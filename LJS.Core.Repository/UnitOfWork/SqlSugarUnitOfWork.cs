@@ -4,11 +4,11 @@ using System;
 
 namespace LJS.Core.Repository.UnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    public class SqlSugarUnitOfWork : ISqlSugarUnitOfWork
     {
         private readonly ISqlSugarClient _sqlSugarClient;
 
-        public UnitOfWork(ISqlSugarClient sqlSugarClient)
+        public SqlSugarUnitOfWork(ISqlSugarClient sqlSugarClient)
         {
             _sqlSugarClient = sqlSugarClient;
         }

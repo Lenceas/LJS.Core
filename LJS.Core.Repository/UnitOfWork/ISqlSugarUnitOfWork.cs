@@ -2,7 +2,7 @@
 
 namespace LJS.Core.IRepository.UnitOfWork
 {
-    public interface IUnitOfWork
+    public interface ISqlSugarUnitOfWork
     {
         SqlSugarClient GetDbClient();
         void BeginTran();

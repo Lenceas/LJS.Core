@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace LJS.Core.Services
 {
-    public class TestServices : BaseServices<TestModel>, ITestServices
+    public class TestServices : BaseSqlSugarServices<TestModel>, ITestServices
     {
-        IBaseRepository<TestModel> _dal;
+        IBaseSqlSugarRepository<TestModel> _dal;
 
-        public TestServices(IBaseRepository<TestModel> dal)
+        public TestServices(IBaseSqlSugarRepository<TestModel> dal)
         {
             this._dal = dal;
             base.BaseDal = dal;

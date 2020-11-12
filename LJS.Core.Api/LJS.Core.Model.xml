@@ -96,7 +96,7 @@
         </member>
         <member name="M:LJS.Core.Model.Seed.DBSeed.SeedAsync(LJS.Core.Model.Seed.MyContext,System.String)">
             <summary>
-            异步添加种子数据
+            异步添加种子数据 SqlSugar
             </summary>
             <param name="myContext"></param>
             <param name="WebRootPath"></param>
@@ -104,7 +104,7 @@
         </member>
         <member name="M:LJS.Core.Model.Seed.DBSeed.SeedAsyncByEFCore(LJS.Core.Model.Seed.MySqlContext,System.String)">
             <summary>
-            异步添加种子数据
+            异步添加种子数据 EF Core
             </summary>
             <param name="mySqlContext"></param>
             <param name="WebRootPath"></param>
