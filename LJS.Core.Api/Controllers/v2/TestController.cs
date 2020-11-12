@@ -18,6 +18,7 @@ namespace LJS.Core.Api.Controllers.v2
     [Produces("application/json")]
     [ApiController]
     [CustomRoute(ApiVersions.v2)]
+    [Authorize]
     public class TestController : ControllerBase
     {
         readonly ITestServices _testServices;
@@ -34,6 +35,7 @@ namespace LJS.Core.Api.Controllers.v2
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<MessageModel<List<TestViewModels>>> GetAll()
         {
             return new MessageModel<List<TestViewModels>>()
@@ -50,6 +52,7 @@ namespace LJS.Core.Api.Controllers.v2
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<MessageModel<TestViewModels>> Get(long id)
         {
             var data = new MessageModel<TestViewModels>();
@@ -74,7 +77,6 @@ namespace LJS.Core.Api.Controllers.v2
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
         public async Task<MessageModel<string>> Add([FromBody] TestModel model)
         {
             var data = new MessageModel<string>();
@@ -106,7 +108,6 @@ namespace LJS.Core.Api.Controllers.v2
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [Authorize]
         public async Task<MessageModel<string>> Update(long id, [FromBody] TestModel model)
         {
             var data = new MessageModel<string>();
@@ -147,7 +148,6 @@ namespace LJS.Core.Api.Controllers.v2
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        [Authorize]
         public async Task<MessageModel<string>> Delete(long id)
         {
             var data = new MessageModel<string>();
