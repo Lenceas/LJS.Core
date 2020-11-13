@@ -29,14 +29,159 @@
             返回数据集合
             </summary>
         </member>
+        <member name="P:LJS.Core.Model.BaseEntity.Id">
+            <summary>
+            泛型主键
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.BaseEntity.IsDeleted">
+            <summary>
+            逻辑上的删除
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.BaseEntity.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.BaseEntity.UpdateTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.BaseEntity.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.BaseEntity.SortId">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="T:LJS.Core.Model.Models.Menu">
+            <summary>
+            菜单表
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Menu.MenuName">
+            <summary>
+            菜单名称
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Menu.ParentMenuId">
+            <summary>
+            父级菜单
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Menu.Url">
+            <summary>
+            路由
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Menu.Status">
+            <summary>
+            状态:1:正常,0:锁定
+            </summary>
+        </member>
+        <member name="T:LJS.Core.Model.Models.Menu_Permission">
+            <summary>
+            菜单权限关联表
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Menu_Permission.MenuId">
+            <summary>
+            菜单ID
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Menu_Permission.PermissionId">
+            <summary>
+            权限ID
+            </summary>
+        </member>
+        <member name="T:LJS.Core.Model.Models.Operation">
+            <summary>
+            操作表 CRUD
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Operation.OperationName">
+            <summary>
+            操作名称
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Operation.Status">
+            <summary>
+            状态:1:正常,0:锁定
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Operation_Permission.OperationId">
+            <summary>
+            操作ID
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Operation_Permission.PermissionId">
+            <summary>
+            权限ID
+            </summary>
+        </member>
+        <member name="T:LJS.Core.Model.Models.Permission">
+            <summary>
+            权限表
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Permission.PermissionName">
+            <summary>
+            权限名称
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Permission.ParentPermissionId">
+            <summary>
+            父级权限
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Permission.Status">
+            <summary>
+            状态:1:正常,0:锁定
+            </summary>
+        </member>
+        <member name="T:LJS.Core.Model.Models.Role">
+            <summary>
+            角色表
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Role.RoleName">
+            <summary>
+            角色名称
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Role.ParentRoleId">
+            <summary>
+            父级角色
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Role.Status">
+            <summary>
+            状态:1:正常,0:锁定
+            </summary>
+        </member>
+        <member name="T:LJS.Core.Model.Models.Role_Permission">
+            <summary>
+            角色权限关联表
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Role_Permission.RoleId">
+            <summary>
+            角色ID
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Role_Permission.PermissionId">
+            <summary>
+            权限ID
+            </summary>
+        </member>
         <member name="T:LJS.Core.Model.Models.TestModel">
             <summary>
             测试模型
-            </summary>
-        </member>
-        <member name="P:LJS.Core.Model.Models.TestModel.Id">
-            <summary>
-            主键
             </summary>
         </member>
         <member name="P:LJS.Core.Model.Models.TestModel.Name">
@@ -44,24 +189,54 @@
             名称
             </summary>
         </member>
-        <member name="P:LJS.Core.Model.Models.TestModel.Remark">
+        <member name="T:LJS.Core.Model.Models.User">
             <summary>
-            备注
+            用户表
             </summary>
         </member>
-        <member name="P:LJS.Core.Model.Models.TestModel.CreateTime">
+        <member name="P:LJS.Core.Model.Models.User.LoginName">
             <summary>
-            创建时间
+            登录账号
             </summary>
         </member>
-        <member name="P:LJS.Core.Model.Models.TestModel.UpdateTime">
+        <member name="P:LJS.Core.Model.Models.User.LoginPwd">
             <summary>
-            更新时间
+            登录密码
             </summary>
         </member>
-        <member name="P:LJS.Core.Model.Models.TestModel.IsDeleted">
+        <member name="P:LJS.Core.Model.Models.User.RealName">
             <summary>
-            逻辑删除
+            真实姓名
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.User.LastLoginTime">
+             <summary>
+            最后登录时间 
+             </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.User.ErrorCount">
+             <summary>
+            错误次数 
+             </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.User.Status">
+            <summary>
+            状态:1:正常,0:锁定
+            </summary>
+        </member>
+        <member name="T:LJS.Core.Model.Models.User_Role">
+            <summary>
+            用户角色关联表
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.User_Role.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.User_Role.RoleId">
+            <summary>
+            角色ID
             </summary>
         </member>
         <member name="T:LJS.Core.Model.PageModel`1">

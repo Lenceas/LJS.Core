@@ -2,17 +2,19 @@
   {
     "Id": 1,
     "Name": "测试数据-1",
-    "Remark": null,
+    "Remark": "备注",
     "CreateTime": "\/Date(1604674711000+0800)\/",
     "UpdateTime": "\/Date(1604674711000+0800)\/",
-    "IsDeleted": "0"
+    "IsDeleted": 0,
+    "SortId": 1
   },
   {
     "Id": 2,
     "Name": "测试数据-2",
-    "Remark": null,
+    "Remark": "备注",
     "CreateTime": "\/Date(1604674711000+0800)\/",
     "UpdateTime": "\/Date(1604674711000+0800)\/",
-    "IsDeleted": "0"
+    "IsDeleted": 0,
+    "SortId": 2
   }
 ]

@@ -20,8 +20,8 @@ namespace LJS.Core.Extensions
             {
                 if (AppSettings.app("AppSettings", "SeedDBEnabled").ObjToBool() || AppSettings.app("AppSettings", "SeedDBDataEnabled").ObjToBool())
                 {
-                    //DBSeed.SeedAsync(myContext, webRootPath).Wait();
-                    DBSeed.SeedAsyncByEFCore(mySqlContext, webRootPath).Wait();
+                    DBSeed.SeedAsync(myContext, webRootPath).Wait();
+                    //DBSeed.SeedAsyncByEFCore(mySqlContext, webRootPath).Wait();
                 }
             }
             catch (Exception e)
