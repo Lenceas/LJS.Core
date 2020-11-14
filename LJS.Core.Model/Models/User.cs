@@ -1,4 +1,5 @@
-﻿using SqlSugar;
+﻿using LJS.Core.Common.Helper;
+using SqlSugar;
 using System;
 
 namespace LJS.Core.Model.Models
@@ -8,6 +9,25 @@ namespace LJS.Core.Model.Models
     /// </summary>
     public class User : BaseEntity
     {
+        public User()
+        {
+        }
+
+        public User(string loginName, string loginPwd, string realName = null, string remark = null)
+        {
+            LoginName = loginName;
+            LoginPwd = MD5Helper.MD5Encrypt64(loginPwd);
+            RealName = realName;
+            Remark = remark;
+            ErrorCount = 0;
+            Status = 1;
+            IsDeleted = false;
+            CreateTime = DateTime.Now.ToLocalTime();
+            UpdateTime = DateTime.Now.ToLocalTime();
+            SortId = 100;
+        }
+
+
         /// <summary>
         /// 登录账号
         /// </summary>
@@ -29,7 +49,7 @@ namespace LJS.Core.Model.Models
         /// <summary>
         ///最后登录时间 
         /// </summary>
-        public DateTime LastLoginTime { get; set; } = DateTime.Now;
+        public DateTime LastLoginTime { get; set; } = DateTime.Now.ToLocalTime();
 
         /// <summary>
         ///错误次数 

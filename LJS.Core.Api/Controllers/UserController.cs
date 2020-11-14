@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LJS.Core.Common.Helper;
 using LJS.Core.IServices;
 using LJS.Core.Model;
 using LJS.Core.Model.Models;
@@ -7,25 +8,26 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using static LJS.Core.Extensions.CustomApiVersion;
 
-namespace LJS.Core.Api.Controllers.v2
+namespace LJS.Core.Api.Controllers
 {
     /// <summary>
-    /// 测试专用
+    /// 用户接口
     /// </summary>
     [ApiController]
-    [CustomRoute(ApiVersions.v2)]
+    [CustomRoute(ApiVersions.v3)]
     [Authorize]
-    public class TestController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly ITestServices _testServices;
+        private readonly IUserServices _userServices;
         private readonly IMapper _mapper;
 
-        public TestController(ITestServices testServices, IMapper mapper)
+        public UserController(IUserServices userServices, IMapper mapper)
         {
-            _testServices = testServices;
+            _userServices = userServices;
             _mapper = mapper;
         }
 
@@ -35,13 +37,13 @@ namespace LJS.Core.Api.Controllers.v2
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<MessageModel<List<TestViewModels>>> GetAll()
+        public async Task<MessageModel<List<UserViewModels>>> GetAll()
         {
-            return new MessageModel<List<TestViewModels>>()
+            return new MessageModel<List<UserViewModels>>()
             {
                 msg = "查询成功",
                 success = true,
-                response = _mapper.Map<List<TestViewModels>>(await _testServices.Query())
+                response = _mapper.Map<List<UserViewModels>>(await _userServices.Query(t => t.Status == 1, "SortId"))
             };
         }
 
@@ -52,10 +54,10 @@ namespace LJS.Core.Api.Controllers.v2
         /// <returns></returns>
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<MessageModel<TestViewModels>> Get(long id)
+        public async Task<MessageModel<UserViewModels>> Get(long id)
         {
-            var data = new MessageModel<TestViewModels>();
-            var entity = await _testServices.QueryById(id);
+            var data = new MessageModel<UserViewModels>();
+            var entity = await _userServices.QueryById(id);
             if (entity != null)
             {
                 data.success = true;
@@ -66,7 +68,7 @@ namespace LJS.Core.Api.Controllers.v2
                 data.status = 204;
                 data.msg = "未匹配到数据";
             }
-            data.response = _mapper.Map<TestViewModels>(entity);
+            data.response = _mapper.Map<UserViewModels>(entity);
             return data;
         }
 
@@ -76,15 +78,11 @@ namespace LJS.Core.Api.Controllers.v2
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<MessageModel<string>> Add([FromBody] TestModel model)
+        public async Task<MessageModel<string>> Add([FromBody] User model)
         {
             var data = new MessageModel<string>();
-            model.Name = "测试数据";
-            model.Remark = "备注";
-            model.CreateTime = DateTime.Now.ToLocalTime();
-            model.UpdateTime = DateTime.Now.ToLocalTime();
-            model.IsDeleted = false;
-            var id = await _testServices.Add(model);
+            var entity = new User(model.LoginName, model.LoginPwd, model.RealName, model.Remark);
+            var id = await _userServices.Add(entity);
             data.success = id > 0;
             if (data.success)
             {
@@ -107,7 +105,7 @@ namespace LJS.Core.Api.Controllers.v2
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<MessageModel<string>> Update(long id, [FromBody] TestModel model)
+        public async Task<MessageModel<string>> Update(long id, [FromBody] User model)
         {
             var data = new MessageModel<string>();
             if (!id.Equals(model.Id))
@@ -116,17 +114,19 @@ namespace LJS.Core.Api.Controllers.v2
                 data.msg = "传入Id与实体Id不一致";
                 return data;
             }
-            var entity = await _testServices.QueryById(id);
+            var entity = await _userServices.QueryById(id);
             if (entity == null)
             {
                 data.status = 204;
                 data.msg = "未匹配到数据";
                 return data;
             }
-            entity.Name = model.Name;
+            entity.LoginName = model.LoginName;
+            entity.LoginPwd = MD5Helper.MD5Encrypt64(model.LoginPwd);
+            entity.RealName = model.RealName;
             entity.Remark = model.Remark;
             entity.UpdateTime = DateTime.Now.ToLocalTime();
-            data.success = await _testServices.Update(entity);
+            data.success = await _userServices.Update(entity);
             if (data.success)
             {
                 data.success = true;
@@ -150,10 +150,10 @@ namespace LJS.Core.Api.Controllers.v2
         public async Task<MessageModel<string>> Delete(long id)
         {
             var data = new MessageModel<string>();
-            var eneity = await _testServices.QueryById(id);
+            var eneity = await _userServices.QueryById(id);
             if (eneity != null)
             {
-                data.success = await _testServices.DeleteById(id);
+                data.success = await _userServices.DeleteById(id);
                 data.msg = data.success ? "删除成功" : "删除失败";
             }
             else

@@ -16,18 +16,8 @@ namespace LJS.Core.Services
 
         public TestServices(IBaseSqlSugarRepository<TestModel> dal)
         {
-            this._dal = dal;
-            base.BaseDal = dal;
-        }
-
-        public async Task<List<TestModel>> GetTests()
-        {
-            return await base.Query(a => a.Id > 0, a => a.Id);
-        }
-
-        public async Task<TestModel> GetById(long id)
-        {
-            return await base.QueryById(id);
+            _dal = dal;
+            BaseDal = dal;
         }
     }
 }

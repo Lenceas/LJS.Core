@@ -17,7 +17,6 @@ namespace LJS.Core.Api.Controllers
     /// <summary>
     /// 登录接口
     /// </summary>
-    [Produces("application/json")]
     [ApiController]
     [CustomRoute(ApiVersions.v3)]
     public class LoginController : ControllerBase

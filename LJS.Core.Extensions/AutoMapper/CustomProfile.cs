@@ -13,6 +13,8 @@ namespace LJS.Core.Extensions.AutoMapper
         {
             CreateMap<TestModel, TestViewModels>();
             CreateMap<TestViewModels, TestModel>();
+            CreateMap<User, UserViewModels>();
+            CreateMap<UserViewModels, User>();
         }
     }
 }

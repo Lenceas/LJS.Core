@@ -15,6 +15,46 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:LJS.Core.Api.Controllers.UserController">
+            <summary>
+            用户接口
+            </summary>
+        </member>
+        <member name="M:LJS.Core.Api.Controllers.UserController.GetAll">
+            <summary>
+            查询列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LJS.Core.Api.Controllers.UserController.Get(System.Int64)">
+            <summary>
+            查询单个
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJS.Core.Api.Controllers.UserController.Add(LJS.Core.Model.Models.User)">
+            <summary>
+            添加
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJS.Core.Api.Controllers.UserController.Update(System.Int64,LJS.Core.Model.Models.User)">
+            <summary>
+            更新
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJS.Core.Api.Controllers.UserController.Delete(System.Int64)">
+            <summary>
+            删除
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:LJS.Core.Api.Controllers.v2.TestController">
             <summary>
             测试专用

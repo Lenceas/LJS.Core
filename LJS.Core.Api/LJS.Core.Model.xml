@@ -420,5 +420,25 @@
             更新时间
             </summary>
         </member>
+        <member name="T:LJS.Core.Model.ViewModels.UserViewModels">
+            <summary>
+            用户信息展示类
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.ViewModels.UserViewModels.Id">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.ViewModels.UserViewModels.LoginName">
+            <summary>
+            登录账号
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.ViewModels.UserViewModels.RealName">
+            <summary>
+            真实姓名
+            </summary>
+        </member>
     </members>
 </doc>
