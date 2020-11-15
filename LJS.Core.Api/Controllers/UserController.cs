@@ -18,6 +18,7 @@ namespace LJS.Core.Api.Controllers
     /// 用户接口
     /// </summary>
     [ApiController]
+    [Produces("application/json")]
     [CustomRoute(ApiVersions.v3)]
     [Authorize]
     public class UserController : ControllerBase

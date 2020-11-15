@@ -16,6 +16,7 @@ namespace LJS.Core.Api.Controllers.v2
     /// 测试专用
     /// </summary>
     [ApiController]
+    [Produces("application/json")]
     [CustomRoute(ApiVersions.v2)]
     [Authorize]
     public class TestController : ControllerBase
