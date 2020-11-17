@@ -20,7 +20,7 @@ namespace LJS.Core.Api.Controllers
     [ApiController]
     [Produces("application/json")]
     [CustomRoute(ApiVersions.v3)]
-    //[Authorize]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserServices _userServices;
