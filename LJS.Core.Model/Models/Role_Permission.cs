@@ -8,6 +8,19 @@ namespace LJS.Core.Model.Models
     /// </summary>
     public class Role_Permission : BaseEntity
     {
+        #region 构造函数
+        public Role_Permission()
+        {
+        }
+
+        public Role_Permission(long roleId, long permissionId) : base()
+        {
+            RoleId = roleId;
+            PermissionId = permissionId;
+        }
+        #endregion
+
+        #region 属性
         /// <summary>
         /// 角色ID
         /// </summary>
@@ -17,5 +30,6 @@ namespace LJS.Core.Model.Models
         /// 权限ID
         /// </summary>
         public long PermissionId { get; set; }
+        #endregion
     }
 }

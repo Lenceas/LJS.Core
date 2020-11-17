@@ -5,6 +5,18 @@ namespace LJS.Core.Model
 {
     public class BaseEntity
     {
+        #region 构造函数
+        public BaseEntity()
+        {
+            IsDeleted = false;
+            CreateTime = DateTime.Now.ToLocalTime();
+            UpdateTime = DateTime.Now.ToLocalTime();
+            Remark = null;
+            SortId = 100;
+        }
+        #endregion
+
+        #region 属性
         /// <summary>
         /// 泛型主键
         /// </summary>
@@ -14,20 +26,17 @@ namespace LJS.Core.Model
         /// <summary>
         /// 逻辑上的删除
         /// </summary>
-        [SugarColumn(IsNullable = true)]
-        public bool? IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
 
         /// <summary>
         /// 创建时间
         /// </summary>
-        [SugarColumn(IsNullable = true)]
-        public DateTime? CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// 更新时间
         /// </summary>
-        [SugarColumn(IsNullable = true)]
-        public DateTime? UpdateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
 
         /// <summary>
         /// 备注
@@ -39,5 +48,6 @@ namespace LJS.Core.Model
         /// 排序
         /// </summary>
         public int SortId { get; set; }
+        #endregion
     }
 }

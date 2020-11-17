@@ -74,7 +74,12 @@
             父级菜单
             </summary>
         </member>
-        <member name="P:LJS.Core.Model.Models.Menu.Url">
+        <member name="P:LJS.Core.Model.Models.Menu.MenuLevel">
+            <summary>
+            菜单层级
+            </summary>
+        </member>
+        <member name="P:LJS.Core.Model.Models.Menu.MenuUrl">
             <summary>
             路由
             </summary>
@@ -101,7 +106,7 @@
         </member>
         <member name="T:LJS.Core.Model.Models.Operation">
             <summary>
-            操作表 CRUD
+            操作表
             </summary>
         </member>
         <member name="P:LJS.Core.Model.Models.Operation.OperationName">
@@ -112,6 +117,11 @@
         <member name="P:LJS.Core.Model.Models.Operation.Status">
             <summary>
             状态:1:正常,0:锁定
+            </summary>
+        </member>
+        <member name="T:LJS.Core.Model.Models.Operation_Permission">
+            <summary>
+            操作权限关联表
             </summary>
         </member>
         <member name="P:LJS.Core.Model.Models.Operation_Permission.OperationId">
