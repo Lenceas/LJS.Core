@@ -17,7 +17,7 @@ namespace LJS.Core.Model.Models
         public User(string loginName, string loginPwd, string realName = null, string remark = null) : base()
         {
             LoginName = loginName;
-            LoginPwd = MD5Helper.MD5Encrypt64(loginPwd);
+            LoginPwd = MD5Helper.MD5Encrypt32(loginPwd);
             RealName = realName;
             Remark = remark;
             Status = 1;
@@ -50,7 +50,7 @@ namespace LJS.Core.Model.Models
         ///错误次数 
         /// </summary>
         [SugarColumn(IsNullable = true)]
-        public int? ErrorCount { get; set; }
+        public int ErrorCount { get; set; }
 
         /// <summary>
         /// 状态:1:正常,0:锁定

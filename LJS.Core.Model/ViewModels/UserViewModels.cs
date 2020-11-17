@@ -18,8 +18,18 @@ namespace LJS.Core.Model.ViewModels
         public string LoginName { get; set; }
 
         /// <summary>
+        /// 登录密码
+        /// </summary>
+        public string LoginPwd { get; set; }
+
+        /// <summary>
         /// 真实姓名
         /// </summary>
         public string RealName { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Remark { get; set; }
     }
 }

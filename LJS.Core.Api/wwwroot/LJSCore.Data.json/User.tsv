@@ -1,0 +1,16 @@
+[
+  {
+    "Id": 1,
+    "LoginName": "admin",
+    "LoginPwd": "7fef6171469e80d32c0559f88b377245",
+    "RealName": "系统管理员",
+    "LastLoginTime": "\/Date(1604674711000+0800)\/",
+    "ErrorCount": 0,
+    "Status": 1,
+    "IsDeleted": 0,
+    "CreateTime": "\/Date(1604674711000+0800)\/",
+    "UpdateTime": "\/Date(1604674711000+0800)\/",
+    "Remark": "",
+    "SortId": 1
+  }
+]

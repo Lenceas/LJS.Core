@@ -2,6 +2,7 @@
 using LJS.Core.Model.Models;
 using LJS.Core.Repository.Base;
 using LJS.Core.Services.Base;
+using System.Threading.Tasks;
 
 namespace LJS.Core.Services
 {
@@ -13,6 +14,12 @@ namespace LJS.Core.Services
         {
             _dal = dal;
             BaseDal = dal;
+        }
+
+        public async Task<bool> IsExist(string loginName)
+        {
+            var user = await _dal.Query(t => t.LoginName == loginName && t.IsDeleted == false && t.Status == 1);
+            return user.Count > 0;
         }
     }
 }

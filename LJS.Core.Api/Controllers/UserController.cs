@@ -20,7 +20,7 @@ namespace LJS.Core.Api.Controllers
     [ApiController]
     [Produces("application/json")]
     [CustomRoute(ApiVersions.v3)]
-    [Authorize]
+    //[Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserServices _userServices;
@@ -44,7 +44,7 @@ namespace LJS.Core.Api.Controllers
             {
                 msg = "查询成功",
                 success = true,
-                response = _mapper.Map<List<UserViewModels>>(await _userServices.Query(t => t.Status == 1, "SortId"))
+                response = _mapper.Map<List<UserViewModels>>(await _userServices.Query(t => t.IsDeleted == false && t.Status == 1, "SortId"))
             };
         }
 
@@ -58,7 +58,7 @@ namespace LJS.Core.Api.Controllers
         public async Task<MessageModel<UserViewModels>> Get(long id)
         {
             var data = new MessageModel<UserViewModels>();
-            var entity = await _userServices.QueryById(id);
+            var entity = await _userServices.Query(t => t.Id == id && t.IsDeleted == false && t.Status == 1);
             if (entity != null)
             {
                 data.success = true;
@@ -79,9 +79,19 @@ namespace LJS.Core.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<MessageModel<string>> Add([FromBody] User model)
+        public async Task<MessageModel<string>> Add([FromBody] UserViewModels model)
         {
             var data = new MessageModel<string>();
+            var isExist = await _userServices.IsExist(model.LoginName);
+            if (isExist)
+            {
+                return new MessageModel<string>()
+                {
+                    success = false,
+                    status = 202,
+                    msg = $"用户名{model.LoginName}已存在",
+                };
+            }
             var entity = new User(model.LoginName, model.LoginPwd, model.RealName, model.Remark);
             var id = await _userServices.Add(entity);
             data.success = id > 0;
@@ -106,7 +116,7 @@ namespace LJS.Core.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<MessageModel<string>> Update(long id, [FromBody] User model)
+        public async Task<MessageModel<string>> Update(long id, [FromBody] UserViewModels model)
         {
             var data = new MessageModel<string>();
             if (!id.Equals(model.Id))
@@ -115,13 +125,14 @@ namespace LJS.Core.Api.Controllers
                 data.msg = "传入Id与实体Id不一致";
                 return data;
             }
-            var entity = await _userServices.QueryById(id);
-            if (entity == null)
+            var entities = await _userServices.Query(t => t.Id == model.Id && t.IsDeleted == false && t.Status == 1);
+            if (entities.Count == 0)
             {
                 data.status = 204;
                 data.msg = "未匹配到数据";
                 return data;
             }
+            var entity = entities.OrderBy(t => t.SortId).FirstOrDefault();
             entity.LoginName = model.LoginName;
             entity.LoginPwd = MD5Helper.MD5Encrypt64(model.LoginPwd);
             entity.RealName = model.RealName;
@@ -151,8 +162,8 @@ namespace LJS.Core.Api.Controllers
         public async Task<MessageModel<string>> Delete(long id)
         {
             var data = new MessageModel<string>();
-            var eneity = await _userServices.QueryById(id);
-            if (eneity != null)
+            var entities = await _userServices.Query(t => t.Id == id && t.IsDeleted == false && t.Status == 1);
+            if (entities.Count > 0)
             {
                 data.success = await _userServices.DeleteById(id);
                 data.msg = data.success ? "删除成功" : "删除失败";

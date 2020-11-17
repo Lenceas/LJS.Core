@@ -9,6 +9,14 @@
             登录接口
             </summary>
         </member>
+        <member name="M:LJS.Core.Api.Controllers.LoginController.Login(System.String,System.String)">
+            <summary>
+            登录
+            </summary>
+            <param name="name">登录账号</param>
+            <param name="pwd">登录密码</param>
+            <returns></returns>
+        </member>
         <member name="M:LJS.Core.Api.Controllers.LoginController.GetJwtToken">
             <summary>
             获取JWT的方法
@@ -33,14 +41,14 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:LJS.Core.Api.Controllers.UserController.Add(LJS.Core.Model.Models.User)">
+        <member name="M:LJS.Core.Api.Controllers.UserController.Add(LJS.Core.Model.ViewModels.UserViewModels)">
             <summary>
             添加
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:LJS.Core.Api.Controllers.UserController.Update(System.Int64,LJS.Core.Model.Models.User)">
+        <member name="M:LJS.Core.Api.Controllers.UserController.Update(System.Int64,LJS.Core.Model.ViewModels.UserViewModels)">
             <summary>
             更新
             </summary>

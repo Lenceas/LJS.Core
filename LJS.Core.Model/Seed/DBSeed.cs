@@ -32,52 +32,19 @@ namespace LJS.Core.Model.Seed
                     throw new Exception("获取wwwroot路径时，异常！");
                 }
 
-                Console.WriteLine("************ LJS.Core DataBase Set *****************");
-                Console.WriteLine($"Is multi-DataBase: {AppSettings.app(new string[] { "MutiDBEnabled" })}");
-                Console.WriteLine($"Is CQRS: {AppSettings.app(new string[] { "CQRSEnabled" })}");
                 Console.WriteLine();
-                Console.WriteLine($"Master DB ConId: {MyContext.ConnId}");
-                Console.WriteLine($"Master DB Type: {MyContext.DbType}");
-                Console.WriteLine($"Master DB ConnectString: {MyContext.ConnectionString}");
-                Console.WriteLine();
-                if (AppSettings.app(new string[] { "MutiDBEnabled" }).ObjToBool())
-                {
-                    var slaveIndex = 0;
-                    BaseDBConfig.MutiConnectionString.allDbs.Where(x => x.ConnId != MainDb.CurrentDbConnId).ToList().ForEach(m =>
-                    {
-                        slaveIndex++;
-                        Console.WriteLine($"Slave{slaveIndex} DB ID: {m.ConnId}");
-                        Console.WriteLine($"Slave{slaveIndex} DB Type: {m.DbType}");
-                        Console.WriteLine($"Slave{slaveIndex} DB ConnectString: {m.Connection}");
-                        Console.WriteLine($"--------------------------------------");
-                    });
-                }
-                else if (AppSettings.app(new string[] { "CQRSEnabled" }).ObjToBool())
-                {
-                    var slaveIndex = 0;
-                    BaseDBConfig.MutiConnectionString.slaveDbs.Where(x => x.ConnId != MainDb.CurrentDbConnId).ToList().ForEach(m =>
-                    {
-                        slaveIndex++;
-                        Console.WriteLine($"Slave{slaveIndex} DB ID: {m.ConnId}");
-                        Console.WriteLine($"Slave{slaveIndex} DB Type: {m.DbType}");
-                        Console.WriteLine($"Slave{slaveIndex} DB ConnectString: {m.Connection}");
-                        Console.WriteLine($"--------------------------------------");
-                    });
-                }
-                else
-                {
-                }
-
+                ConsoleHelper.WriteInfoLine("************ LJS.Core DataBase Set *****************");
                 Console.WriteLine();
 
                 // 创建数据库
-                Console.WriteLine($"Create Database(The Db Id:{MyContext.ConnId})...");
+                ConsoleHelper.WriteInfoLine($"Create Database...");
                 myContext.Db.DbMaintenance.CreateDatabase();
                 ConsoleHelper.WriteSuccessLine($"Database created successfully!");
+                Console.WriteLine();
 
                 // 创建数据库表，遍历指定命名空间下的class，
                 // 注意不要把其他命名空间下的也添加进来。
-                Console.WriteLine("Create Tables...");
+                ConsoleHelper.WriteInfoLine("Create Tables...");
                 var modelTypes = from t in Assembly.GetExecutingAssembly().GetTypes()
                                  where t.IsClass && t.Namespace == "LJS.Core.Model.Models"
                                  select t;
@@ -110,7 +77,7 @@ namespace LJS.Core.Model.Seed
                         return setting;
                     });
 
-                    Console.WriteLine($"Seeding database data (The Db Id:{MyContext.ConnId})...");
+                    Console.WriteLine($"Seeding database data...");
 
                     #region TestModel
                     if (!await myContext.Db.Queryable<TestModel>().AnyAsync())
@@ -128,6 +95,17 @@ namespace LJS.Core.Model.Seed
                     }
                     #endregion
 
+                    #region User
+                    if (!await myContext.Db.Queryable<User>().AnyAsync())
+                    {
+                        myContext.GetEntityDB<User>().InsertRange(JsonHelper.ParseFormByJson<List<User>>(FileHelper.ReadFile(string.Format(WebRootPath + SeedDataFolder, "User"), Encoding.UTF8)));
+                    }
+                    else
+                    {
+                        Console.WriteLine("Table:User already exists...");
+                    }
+                    #endregion
+
                     ConsoleHelper.WriteSuccessLine($"Done seeding database!");
                 }
 
@@ -135,7 +113,7 @@ namespace LJS.Core.Model.Seed
             }
             catch (Exception ex)
             {
-                throw new Exception("1、如果使用的是Mysql，生成的数据库字段字符集可能不是utf8的，手动修改下，或者尝试方案：删掉数据库，在连接字符串后加上CharSet=UTF8，重新生成数据库. \n 2、其他错误：" + ex.Message);
+                throw new Exception("错误信息：" + ex.Message);
             }
         }
 

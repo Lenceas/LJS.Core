@@ -10,5 +10,6 @@ namespace LJS.Core.IServices
 {
     public interface IUserServices : IBaseSqlSugarServices<User>
     {
+        Task<bool> IsExist(string loginName);
     }
 }
